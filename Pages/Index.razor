@@ -1,0 +1,67 @@
+@page "/"
+
+@using Family.Data
+@using Family.Persistence
+@inject IAdultRepository Repo
+
+<h1>Adults</h1>
+
+<div class="my-3">
+    <input class="form-control" type="text" placeholder="Search..."
+           @onchange="e => filtered = Repo.FindByNameContains(e.Value.ToString())"/>
+</div>
+<div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Hair color</th>
+            <th>Eye color</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Sex</th>
+            <AuthorizeView Policy="MustBeLoggedIn">
+                <th>Actions</th>
+            </AuthorizeView>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var adult in filtered)
+        {
+            <tr>
+                <td>@adult.FirstName @adult.LastName</td>
+                <td>@adult.HairColor</td>
+                <td>@adult.EyeColor</td>
+                <td>@adult.Age</td>
+                <td>@adult.Weight</td>
+                <td>@adult.Height</td>
+                <td>@adult.Sex</td>
+                <AuthorizeView Policy="MustBeLoggedIn">
+                    <td>
+                        <button class="btn btn-danger" @onclick="@(e => DeleteAdult(adult.Id))">Delete</button>
+                    </td>
+                </AuthorizeView>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@code {
+
+    private List<Adult> filtered;
+
+    protected override void OnInitialized()
+    {
+        filtered = Repo.GetAll();
+    }
+
+    private void DeleteAdult(int id)
+    {
+        Repo.Delete(id);
+
+        InvokeAsync(StateHasChanged);
+    }
+
+}

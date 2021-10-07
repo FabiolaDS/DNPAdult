@@ -1,0 +1,62 @@
+[
+  {
+    "JobTitle": {
+      "JobTitle": "asd",
+      "Salary": 1234
+    },
+    "Id": 3,
+    "FirstName": "Fabiola",
+    "LastName": "G",
+    "HairColor": "ewq",
+    "EyeColor": "qwe",
+    "Age": 123,
+    "Weight": 32,
+    "Height": 5125,
+    "Sex": "qwe"
+  },
+  {
+    "JobTitle": {
+      "JobTitle": "dadawd",
+      "Salary": 1200
+    },
+    "Id": 4,
+    "FirstName": "lorem",
+    "LastName": "ipsum",
+    "HairColor": "dolor",
+    "EyeColor": "sit",
+    "Age": 25,
+    "Weight": 35,
+    "Height": 12,
+    "Sex": "amet"
+  },
+  {
+    "JobTitle": {
+      "JobTitle": "SDFGHHJ",
+      "Salary": 50000
+    },
+    "Id": 5,
+    "FirstName": "Fabiana",
+    "LastName": "Octave",
+    "HairColor": "black",
+    "EyeColor": "black",
+    "Age": 20,
+    "Weight": 60,
+    "Height": 6,
+    "Sex": "F"
+  },
+  {
+    "JobTitle": {
+      "JobTitle": "Software engineer",
+      "Salary": 10000000
+    },
+    "Id": 6,
+    "FirstName": "Mario",
+    "LastName": "Fet",
+    "HairColor": "blue",
+    "EyeColor": "red",
+    "Age": 17,
+    "Weight": 80,
+    "Height": 10,
+    "Sex": "FM"
+  }
+]

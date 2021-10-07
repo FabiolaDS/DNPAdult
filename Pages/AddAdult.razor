@@ -1,0 +1,124 @@
+﻿@page "/adults/add"
+
+@attribute [Authorize(Policy = "MustBeLoggedIn")]
+
+@using Family.Persistence
+@using Family.Data
+
+@inject IAdultRepository Repo
+@inject NavigationManager Nav
+
+<h1>Add adult</h1>
+
+<EditForm Model="@model" OnValidSubmit="@RegisterAdult">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+
+    <table>
+        <tr>
+            <td>First name: </td>
+            <td>
+                <InputText id="firstName" class="form-control" @bind-Value="model.FirstName"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Last name: </td>
+            <td>
+                <InputText id="lastName" class="form-control" @bind-Value="model.LastName"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Hair color:</td>
+            <td>
+                <InputText id="hairColor" class="form-control" @bind-Value="model.HairColor"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Eye color:</td>
+            <td>
+                <InputText id="eyeColor" class="form-control" @bind-Value="model.EyeColor"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Age:</td>
+            <td>
+                <InputNumber id="age" class="form-control" @bind-Value="model.Age"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Weight:</td>
+            <td>
+                <InputNumber id="weight" class="form-control" @bind-Value="model.Weight"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Height:</td>
+            <td>
+                <InputNumber id="height" class="form-control" @bind-Value="model.Height"/>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Sex:</td>
+            <td>
+                <InputText id="sex" class="form-control" @bind-Value="model.Sex"/>
+            </td>
+        </tr>
+        
+        <tr>
+            <td>Job title:</td>
+            <td>
+                <InputText id="jobTitle" class="form-control" @bind-Value="model.JobTitle"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Salary:</td>
+            <td>
+                <InputNumber id="salary" class="form-control" @bind-Value="model.Salary"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </td>
+        </tr>
+    </table>
+
+</EditForm>
+
+@code {
+    private AdultRegisterModel model = new AdultRegisterModel();
+
+    private void RegisterAdult()
+    {
+        Adult entity = new Adult()
+        {
+            FirstName = model.FirstName,
+            LastName = model.LastName,
+            Age = model.Age,
+            EyeColor = model.EyeColor,
+            HairColor = model.HairColor,
+            Height = model.Height,
+            Weight = model.Weight,
+            Sex = model.Sex,
+            JobTitle = new Job()
+            {
+                JobTitle = model.JobTitle,
+                Salary = model.Salary
+            }
+        };
+
+        Repo.Save(entity);
+        
+        Nav.NavigateTo("/");
+    }
+
+}

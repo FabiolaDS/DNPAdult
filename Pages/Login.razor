@@ -1,0 +1,79 @@
+﻿@page "/login"
+@using Family.Authentication
+
+@inject AuthenticationStateProvider authStateProvider
+@inject NavigationManager nav;
+
+<h1>Login</h1>
+
+<AuthorizeView Context="Auth" Policy="MustBeLoggedIn">
+    
+    <Authorized>
+        <p>You are already logged in as @Auth.User.Identity.Name</p>
+        <button class="btn btn-danger" @onclick="LogoutUser">Logout</button>
+    </Authorized>
+
+    <NotAuthorized>
+        <div class="container">
+            <EditForm Model="@model" OnValidSubmit="@LoginUser">
+                <div class="row p-3">
+                    <DataAnnotationsValidator/>
+                    <ValidationSummary/><br/>
+                    <p>@errorMessage</p>
+                </div>
+                
+                <div class="row p-3">
+                    <div class="col-md-6">
+                        Username: <InputText class="form-control" @bind-Value="@model.Username"></InputText>
+                    </div>
+                </div>
+
+                <div class="row p-3">
+                    <div class="col-md-6">
+                        Password: <InputText type="password" class="form-control" @bind-Value="@model.Password"></InputText>
+                    </div>
+                </div>
+
+                <div class="row p-3">
+                    <div class="col-md-6">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    </NotAuthorized>
+    
+</AuthorizeView>
+
+@code {
+
+    private LoginModel model = new();
+    private string errorMessage;
+
+    private void LoginUser()
+    {
+        errorMessage = "";
+
+        try
+        {
+            ((CustomAuthenticationStateProvider) authStateProvider).ValidateLogin(model.Username, model.Password);
+            nav.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.Message;
+        }
+        model.Password = "";
+    }
+
+    private void LogoutUser()
+    {
+        errorMessage = "";
+        model.Username = "";
+        model.Password = "";
+
+        ((CustomAuthenticationStateProvider) authStateProvider).Logout();
+        nav.NavigateTo("/");
+    }
+
+}
