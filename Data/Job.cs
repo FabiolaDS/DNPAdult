@@ -5,7 +5,7 @@ namespace Family.Data
 {
     public class Job
     {
-        public string JobTitle { get; set; }
-        public int Salary { get; set; }
+        public string jobTitle { get; set; }
+        public int salary { get; set; }
     }
 }

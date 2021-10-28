@@ -97,26 +97,26 @@
 @code {
     private AdultRegisterModel model = new AdultRegisterModel();
 
-    private void RegisterAdult()
+    private async Task RegisterAdult()
     {
         Adult entity = new Adult()
         {
-            FirstName = model.FirstName,
-            LastName = model.LastName,
-            Age = model.Age,
-            EyeColor = model.EyeColor,
-            HairColor = model.HairColor,
-            Height = model.Height,
-            Weight = model.Weight,
-            Sex = model.Sex,
-            JobTitle = new Job()
+            firstName = model.FirstName,
+            lastName = model.LastName,
+            age = model.Age,
+            eyeColor = model.EyeColor,
+            hairColor = model.HairColor,
+            height = model.Height,
+            weight = model.Weight,
+            sex = model.Sex,
+            jobTitle = new Job()
             {
-                JobTitle = model.JobTitle,
-                Salary = model.Salary
+                jobTitle = model.JobTitle,
+                salary = model.Salary
             }
         };
 
-        Repo.Save(entity);
+        await Repo.Save(entity);
         
         Nav.NavigateTo("/");
     }

@@ -34,10 +34,9 @@ namespace Family
             services.AddServerSideBlazor();
 
             // Dependency Injection config
-            services.AddSingleton<FileContext>();
-            services.AddSingleton<IAdultRepository, FileAdultRepository>();
             services.AddScoped<IUserService, InMemoryUserService>();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            services.AddSingleton<IAdultRepository,RestAdultRepository>();
 
             // Setup security
             services.AddAuthorization(options =>

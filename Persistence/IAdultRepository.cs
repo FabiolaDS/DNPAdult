@@ -1,18 +1,19 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Family.Data;
 
 namespace Family.Persistence
 {
-    interface IAdultRepository
+    public interface IAdultRepository
     {
-        List<Adult> GetAll();
+        Task<List<Adult>> GetAll();
 
-        void Save(Adult a);
+        Task Save(Adult a);
 
         void Update(Adult a);
 
-        void Delete(int id);
+        Task Delete(int id);
 
-        List<Adult> FindByNameContains(string str);
+        Task<List<Adult>> FindByNameContains(string str);
     }
 }
