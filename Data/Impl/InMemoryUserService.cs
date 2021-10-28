@@ -15,18 +15,18 @@ namespace Family.Data.Impl
             {
                 new User
                 {
-                    Password = "123456",
-                    UserName = "Fabiola"
+                    password = "123456",
+                    userName = "Fabiola"
                 },
                 new User
                 {
-                    Password = "123456",
-                    UserName = "Jakob"
+                    password = "123456",
+                    userName = "Jakob"
                 },
                 new User
                 {
-                    Password = "123456",
-                    UserName = "Kasper"
+                    password = "123456",
+                    userName = "Kasper"
                 }
             }.ToList();
         }
@@ -34,13 +34,13 @@ namespace Family.Data.Impl
 
         public User ValidateUser(string userName, string password)
         {
-            User first = users.FirstOrDefault(user => user.UserName.Equals(userName));
+            User first = users.FirstOrDefault(user => user.userName.Equals(userName));
             if (first == null)
             {
                 throw new Exception("User not found");
             }
 
-            if (!first.Password.Equals(password))
+            if (!first.password.Equals(password))
             {
                 throw new Exception("Incorrect password");
             }

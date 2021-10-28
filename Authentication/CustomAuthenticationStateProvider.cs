@@ -31,7 +31,7 @@ namespace Family.Authentication
                 if (!string.IsNullOrEmpty(userAsJson))
                 {
                     User tmp = JsonSerializer.Deserialize<User>(userAsJson);
-                    ValidateLogin(tmp.UserName, tmp.Password);
+                    ValidateLogin(tmp.userName, tmp.password);
                 }
             }
             else
@@ -78,7 +78,7 @@ namespace Family.Authentication
         private ClaimsIdentity SetupClaimsForUser(User user)
         {
             List<Claim> claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, user.UserName));
+            claims.Add(new Claim(ClaimTypes.Name, user.userName));
 
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
